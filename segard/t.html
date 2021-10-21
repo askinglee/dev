@@ -1,0 +1,182 @@
+<html lang="zh">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="gsap.min.js"></script>
+		<style>
+			body {
+				background:rgb(247,252,255);
+				padding: 30px;
+			}
+			section {
+				background: #fff;
+				border-radius: 8px;
+				padding: 30px;
+			}
+			section > div {
+				min-width: 300px;
+				margin-top: 20px;
+			}
+			.mycircle{
+				stroke: #4a90e2;
+				fill:rgba(0,0,0,0);
+				stroke-width: 10px;
+				stroke-dasharray: 0  1000;
+				stroke-linecap: round;
+			}
+			.txt{
+				text-anchor: middle;
+				/* 文本水平居中 */
+				dominant-baseline: middle;
+				/* 文本垂直居中 */
+				font-size: 40px;
+				font-family: Arial;
+				color: #4a90e2;
+			}
+			.txt.txt2{
+				font-size:14px;
+			}
+		</style>
+		<script>
+			$(function(){
+				var obj = {
+					num1: 0,
+					num2: 0,
+					num3: 0,
+					num4: 0,
+				}
+				gsap.to(obj, {
+						num1: 40,
+						num2: 100,
+						num3: 138,
+						num4: 200,
+						duration: 3,
+						delay: 0.1,
+						onUpdate: function(){
+							console.log(obj.num1)
+							$('#rate1').text(obj.num1.toFixed(0))
+							$('#rate2').text(obj.num2.toFixed(0))
+							$('#rate3').text(obj.num3.toFixed(0))
+							$('#rate4').text(obj.num4.toFixed(0))
+						}
+					}).then(function(){
+						console.log(obj.num1)
+					})
+				gsap.to("#rateContainer1,#rect1", {
+					width: 40,
+					duration: 3,
+					delay: 0.1
+				})
+				gsap.to("#rateContainer2,#rect2", {
+					width: 100,
+					duration: 3,
+					delay: 0.1
+				})
+				gsap.to("#rateContainer3,#rect3", {
+					width: 138,
+					duration: 3,
+					delay: 0.1
+				})
+				gsap.to("#rateContainer4,#rect4", {
+					width: 200,
+					duration: 3,
+					delay: 0.1
+				})
+				var obj2 = {
+					num1: 0,
+					num2: 0
+				}
+				gsap.to(obj2, {
+						num1: 61,
+						num2: 50,
+						duration: 3,
+						delay: 0.1,
+						onUpdate: function(){
+							console.log(obj2.num1)
+							$('#txt').text(obj2.num1.toFixed(0)+'%')
+							$('#progressRound')[0].style.strokeDasharray = obj2.num1*Math.PI*2 + ' 1000'
+							$('#txt2').text(obj2.num2.toFixed(0)+'%')
+							$('#progressRound2')[0].style.strokeDasharray = obj2.num2*Math.PI*2 + ' 1000'
+						}
+					}).then(function(){
+						console.log(obj2.num1)
+					})
+			})
+			
+			
+		</script>
+	</head>
+	<body>
+		<section>
+			<h3>进度条示例</h3>
+			<div>
+				<div id="rateContainer1" style="text-align:right;width:20px"><span id="rate1" class="rate" style="color:#04c204">0<span></div>
+				<div>
+					<svg width="200" height="20">					
+						<rect id="rect1" x="0" y="10" rx="4" height="10" fill="#04c204" width="0"></rect>
+					</svg>
+				</div>
+			</div>
+			<div>
+				<div id="rateContainer2" style="text-align:right;width:20px"><span id="rate2" class="rate" style="color:#006a00">0<span></div>
+				<div>
+					<svg width="200" height="20">					
+						<rect id="rect2" x="0" y="10" rx="4" height="10" fill="#006a00" width="0"></rect>
+					</svg>
+				</div>
+			</div>
+			<div>
+				<div id="rateContainer3" style="text-align:right;width:20px"><span id="rate3" class="rate" style="color:#006a00">0<span></div>
+				<div>
+					<svg width="200" height="20">					
+						<rect id="rect3" x="0" y="10" rx="4" height="10" fill="#006a00" width="0"></rect>
+					</svg>
+				</div>
+			</div>
+			<div>
+				<div id="rateContainer4" style="text-align:right;width:20px"><span id="rate4" class="rate" style="color:#006a00">0<span></div>
+				<div>
+					<svg width="200" height="20">					
+						<rect id="rect4" x="0" y="10" rx="4" height="10" fill="#006a00" width="0"></rect>
+					</svg>
+				</div>
+			</div>
+		</section>
+		<section>
+			<h3>环形进度条示例</h3>
+			<div>
+				<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="110"  cy="110"   r = "100" fill="none"  stroke="#eee" stroke-width="10">
+					</circle>
+					<circle cx="0"  cy="0"   r = "100" class="mycircle" id="progressRound"
+							transform="translate(110,110) rotate(-90)">
+				   </circle>
+				   <text x="0" y="0" fill="#4a90e2" class="txt" id="txt" transform="translate(110,100)">
+						0%
+				   </text>
+				   <text x="0" y="0" fill="#555" class="txt txt2"
+						  transform="translate(110,130)">
+						文字区域文字区
+				   </text>
+				</svg>
+			</div>
+			<div>
+				<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="110"  cy="110"   r = "100" fill="none"  stroke="#eee" stroke-width="10">
+					</circle>
+					<circle cx="0"  cy="0"   r = "100" class="mycircle" id="progressRound2"
+							transform="translate(110,110) rotate(-90)">
+				   </circle>
+				   <text x="0" y="0" fill="#4a90e2" class="txt" id="txt2" transform="translate(110,100)">
+						0%
+				   </text>
+				   <text x="0" y="0" fill="#555" class="txt txt2"
+						  transform="translate(110,130)">
+						文字区域文字区
+				   </text>
+				</svg>
+			</div>
+		</section>
+	</body>
+</html>
